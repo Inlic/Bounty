@@ -36,6 +36,10 @@
       "frameworks": {
         "netcoreapp3.1": {
           "dependencies": {
+            "Codeworks.Auth0Provider": {
+              "target": "Package",
+              "version": "[*, )"
+            },
             "Dapper": {
               "target": "Package",
               "version": "[2.0.35, )"

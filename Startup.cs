@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Data;
 using System.Linq;
 using System.Threading.Tasks;
+using CodeWorks.Auth0Provider;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -18,13 +19,10 @@ namespace Bounty
 {
   public class Startup
   {
-    string _connectionString;
     public Startup(IConfiguration configuration)
     {
       Configuration = configuration;
-      _connectionString = Configuration.GetConnectionString("MySql");
     }
-
     public IConfiguration Configuration { get; }
 
     // This method gets called by the runtime. Use this method to add services to the container.
@@ -56,13 +54,15 @@ namespace Bounty
 
       services.AddControllers();
       services.AddScoped<IDbConnection>(x => CreateDBContext());
+      // TODO Add transients on creation
+
+
     }
 
     private IDbConnection CreateDBContext()
     {
-      IDbConnection connection = new MySqlConnection(_connectionString);
-      connection.Open();
-      return connection;
+      var connectionString = Configuration.GetConnectionString("MySql");
+      return new MySqlConnection(connectionString);
     }
 
     // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -71,13 +71,22 @@ namespace Bounty
       if (env.IsDevelopment())
       {
         app.UseDeveloperExceptionPage();
+        app.UseCors("CorsDevPolicy");
       }
+
+      Auth0ProviderExtension.ConfigureKeyMap(new List<string>() { "id" });
 
       app.UseHttpsRedirection();
 
       app.UseRouting();
 
+      app.UseAuthentication();
+
       app.UseAuthorization();
+
+      app.UseDefaultFiles();
+
+      app.UseStaticFiles();
 
       app.UseEndpoints(endpoints =>
       {
