@@ -9,6 +9,7 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.SpaServices.AngularCli;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -28,6 +29,13 @@ namespace Bounty
     // This method gets called by the runtime. Use this method to add services to the container.
     public void ConfigureServices(IServiceCollection services)
     {
+
+      services.AddControllersWithViews();
+      services.AddSpaStaticFiles(configuration =>
+      {
+        configuration.RootPath = "ClientApp/dist";
+      });
+
       services.AddAuthentication(options =>
               {
                 options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
@@ -55,8 +63,6 @@ namespace Bounty
       services.AddControllers();
       services.AddScoped<IDbConnection>(x => CreateDBContext());
       // TODO Add transients on creation
-
-
     }
 
     private IDbConnection CreateDBContext()
@@ -73,6 +79,12 @@ namespace Bounty
         app.UseDeveloperExceptionPage();
         app.UseCors("CorsDevPolicy");
       }
+      else
+      {
+        app.UseExceptionHandler("/Error");
+        // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
+        app.UseHsts();
+      }
 
       Auth0ProviderExtension.ConfigureKeyMap(new List<string>() { "id" });
 
@@ -87,10 +99,28 @@ namespace Bounty
       app.UseDefaultFiles();
 
       app.UseStaticFiles();
+      if (!env.IsDevelopment())
+      {
+        app.UseSpaStaticFiles();
+      }
 
       app.UseEndpoints(endpoints =>
       {
-        endpoints.MapControllers();
+        endpoints.MapControllerRoute(
+            name: "default",
+            pattern: "{controller}/{action=Index}/{id?}");
+      });
+      app.UseSpa(spa =>
+      {
+        // To learn more about options for serving an Angular SPA from ASP.NET Core,
+        // see https://go.microsoft.com/fwlink/?linkid=864501
+
+        spa.Options.SourcePath = "ClientApp";
+
+        if (env.IsDevelopment())
+        {
+          spa.UseAngularCliServer(npmScript: "start");
+        }
       });
     }
   }
