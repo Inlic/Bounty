@@ -14445,6 +14445,17 @@
     "CSharpLanguageVersion": 800
   },
   "RootNamespace": "Bounty",
-  "Documents": [],
+  "Documents": [
+    {
+      "FilePath": "c:\\source\\myprojects\\Bounty\\Pages\\Error.cshtml",
+      "TargetPath": "Pages\\Error.cshtml",
+      "FileKind": "mvc"
+    },
+    {
+      "FilePath": "c:\\source\\myprojects\\Bounty\\Pages\\_ViewImports.cshtml",
+      "TargetPath": "Pages\\_ViewImports.cshtml",
+      "FileKind": "mvc"
+    }
+  ],
   "SerializationFormat": "0.2"
 }
