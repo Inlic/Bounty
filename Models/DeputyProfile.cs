@@ -5,6 +5,5 @@ namespace Bounty.Models
     public int Id { get; set; }
     public int CreatorId { get; set; }
     public int DeputyId { get; set; }
-    public string ProfileId { get; set; }
   }
 }
