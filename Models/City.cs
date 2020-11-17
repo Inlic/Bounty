@@ -1,5 +1,3 @@
-using System.Collections.Generic;
-
 namespace Bounty.Models
 {
   public class City
