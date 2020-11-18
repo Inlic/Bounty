@@ -51,5 +51,30 @@ namespace Bounty.Controllers
         return BadRequest(error.Message);
       }
     }
+    [HttpPut("{id}")]
+    public ActionResult<Award> Update([FromBody] Award award, int id)
+    {
+      try
+      {
+        award.Id = id;
+        return Ok(_service.Update(award));
+      }
+      catch (System.Exception error)
+      {
+        return BadRequest(error.Message);
+      }
+    }
+    [HttpDelete("{id}")]
+    public ActionResult<bool> Delete(int id)
+    {
+      try
+      {
+        return Ok(_service.Delete(id));
+      }
+      catch (System.Exception error)
+      {
+        return BadRequest(error.Message);
+      }
+    }
   }
 }
