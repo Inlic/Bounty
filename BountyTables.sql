@@ -25,6 +25,12 @@ CREATE TABLE IF NOT EXISTS cities(
  PRIMARY KEY (id)
 );
 
+INSERT INTO cities(name)
+VALUES("Cactus Town");
+
+SELECT * FROM cities
+
+
 CREATE TABLE IF NOT EXISTS awards(
   id int AUTO_INCREMENT NOT NULL,
   description VARCHAR(255),
@@ -38,7 +44,13 @@ CREATE TABLE IF NOT EXISTS awards(
   ON DELETE CASCADE
 );
 
+INSERT INTO awards(description, payout, cityid)
+VALUES("Catch the Cactus Gang", 100, 1)
 
+INSERT INTO awards(description, payout, cityid)
+VALUES("Round up some Mustangs", 50, 1)
+
+SELECT * FROM awards;
 
 CREATE TABLE IF NOT EXISTS deputies(
  id int AUTO_INCREMENT NOT NULL,
