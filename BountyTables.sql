@@ -18,20 +18,27 @@ CREATE TABLE IF NOT EXISTS profiles(
   PRIMARY KEY (id)
 );
 
-CREATE TABLE IF NOT EXISTS awards(
-  id int AUTO_INCREMENT NOT NULL,
-  description VARCHAR(255),
-  payout DECIMAL(8,2),
-
-  PRIMARY KEY (id)
-);
-
 CREATE TABLE IF NOT EXISTS cities(
  id int AUTO_INCREMENT NOT NULL,
  name VARCHAR(255),
 
  PRIMARY KEY (id)
 );
+
+CREATE TABLE IF NOT EXISTS awards(
+  id int AUTO_INCREMENT NOT NULL,
+  description VARCHAR(255),
+  payout DECIMAL(8,2),
+  cityid int,
+
+  PRIMARY KEY (id),
+
+  FOREIGN KEY (cityid)
+  REFERENCES cities(id)
+  ON DELETE CASCADE
+);
+
+
 
 CREATE TABLE IF NOT EXISTS deputies(
  id int AUTO_INCREMENT NOT NULL,

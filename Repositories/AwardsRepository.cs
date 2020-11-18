@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using System.Data;
 using Bounty.Models;
+using Dapper;
 
 namespace Bounty.Repositories
 {
@@ -18,8 +19,14 @@ namespace Bounty.Repositories
       return _db.Query<Award, City, Award>(@"
       SELECT a.*,
       c.*
-      FROM awards
-      ")
+      FROM awards a
+      JOIN cities c ON c.id = a.cityid;
+      ", (award, city) =>
+      {
+        award.City = city;
+        return award;
+      }, splitOn: "id"
+      );
     }
   }
 }
