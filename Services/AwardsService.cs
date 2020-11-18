@@ -15,7 +15,7 @@ namespace Bounty.Services
 
     internal object Get()
     {
-      throw new NotImplementedException();
+      return _repo.Get();
     }
 
     internal object GetById(int id)

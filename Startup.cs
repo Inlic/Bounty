@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Data;
 using System.Linq;
 using System.Threading.Tasks;
+using Bounty.Repositories;
+using Bounty.Services;
 using CodeWorks.Auth0Provider;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
@@ -61,7 +63,17 @@ namespace Bounty
       });
 
       services.AddControllers();
+
       services.AddScoped<IDbConnection>(x => CreateDBContext());
+      services.AddTransient<AwardsService>();
+      services.AddTransient<AwardsRepository>();
+      services.AddTransient<CitiesService>();
+      services.AddTransient<CitiesRepository>();
+      services.AddTransient<DeputiesService>();
+      services.AddTransient<DeputiesRepository>();
+      services.AddTransient<ProfilesService>();
+      services.AddTransient<ProfilesRepository>();
+
       // TODO Add transients on creation
     }
 
@@ -104,12 +116,15 @@ namespace Bounty
         app.UseSpaStaticFiles();
       }
 
+
+
       app.UseEndpoints(endpoints =>
       {
         endpoints.MapControllerRoute(
             name: "default",
             pattern: "{controller}/{action=Index}/{id?}");
       });
+
       app.UseSpa(spa =>
       {
         // To learn more about options for serving an Angular SPA from ASP.NET Core,

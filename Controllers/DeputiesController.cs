@@ -50,7 +50,7 @@ namespace Bounty.Controllers
         return BadRequest(error.Message);
       }
     }
-    [HttpPut("{id")]
+    [HttpPut("{id}")]
     public ActionResult<Deputy> Update([FromBody] Deputy deputy, int id)
     {
       try
