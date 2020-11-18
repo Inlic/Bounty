@@ -53,7 +53,7 @@ CREATE TABLE IF NOT EXISTS awardcities(
   ON DELETE CASCADE,
 
   FOREIGN KEY (awardid)
-  REFERENCES bounties(id)
+  REFERENCES awards(id)
   ON DELETE CASCADE,
 
   FOREIGN KEY (cityid)
@@ -75,7 +75,7 @@ CREATE TABLE IF NOT EXISTS awarddeputies(
   ON DELETE CASCADE,
 
   FOREIGN KEY (awardid)
-  REFERENCES bounties(id)
+  REFERENCES awards(id)
   ON DELETE CASCADE,
 
   FOREIGN KEY (deputyid)
