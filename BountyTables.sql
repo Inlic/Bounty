@@ -1,9 +1,9 @@
 DROP TABLE cityprofiles;
 DROP TABLE deputyprofiles;
-DROP TABLE bountycities;
-DROP TABLE bountydeputies;
+DROP TABLE awardcities;
+DROP TABLE awarddeputies;
 DROP TABLE profiles;
-DROP TABLE bounties;
+DROP TABLE awards;
 DROP TABLE cities;
 DROP TABLE deputies;
 
@@ -18,7 +18,7 @@ CREATE TABLE IF NOT EXISTS profiles(
   PRIMARY KEY (id)
 );
 
-CREATE TABLE IF NOT EXISTS bounties(
+CREATE TABLE IF NOT EXISTS awards(
   id int AUTO_INCREMENT NOT NULL,
   description VARCHAR(255),
   payout DECIMAL(8,2),
@@ -40,10 +40,10 @@ CREATE TABLE IF NOT EXISTS deputies(
  PRIMARY KEY (id)
 );
 
-CREATE TABLE IF NOT EXISTS bountycities(
+CREATE TABLE IF NOT EXISTS awardcities(
   id int AUTO_INCREMENT NOT NULL,
   creatorid VARCHAR(255) NOT NULL,
-  bountyid int,
+  awardid int,
   cityid int,
 
   PRIMARY KEY (id),
@@ -52,7 +52,7 @@ CREATE TABLE IF NOT EXISTS bountycities(
   REFERENCES profiles(id)
   ON DELETE CASCADE,
 
-  FOREIGN KEY (bountyid)
+  FOREIGN KEY (awardid)
   REFERENCES bounties(id)
   ON DELETE CASCADE,
 
@@ -62,10 +62,10 @@ CREATE TABLE IF NOT EXISTS bountycities(
 
 );
 
-CREATE TABLE IF NOT EXISTS bountydeputies(
+CREATE TABLE IF NOT EXISTS awarddeputies(
   id int AUTO_INCREMENT NOT NULL,
   creatorid VARCHAR(255) NOT NULL,
-  bountyid int,
+  awardid int,
   deputyid int,
 
   PRIMARY KEY (id),
@@ -74,7 +74,7 @@ CREATE TABLE IF NOT EXISTS bountydeputies(
   REFERENCES profiles(id)
   ON DELETE CASCADE,
 
-  FOREIGN KEY (bountyid)
+  FOREIGN KEY (awardid)
   REFERENCES bounties(id)
   ON DELETE CASCADE,
 

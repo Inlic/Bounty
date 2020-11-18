@@ -1,6 +1,6 @@
 namespace Bounty.Models
 {
-  public class Bounty
+  public class Award
   {
     public int Id { get; set; }
     public string Description { get; set; }
