@@ -1,10 +1,17 @@
 using System;
 using Bounty.Models;
+using Bounty.Repositories;
 
 namespace Bounty.Services
 {
   public class DeputiesService
   {
+    private readonly DeputiesRepository _repo;
+
+    public DeputiesService(DeputiesRepository repo)
+    {
+      _repo = repo;
+    }
     internal object Get()
     {
       throw new NotImplementedException();

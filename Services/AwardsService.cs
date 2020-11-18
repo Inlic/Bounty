@@ -1,10 +1,18 @@
 using System;
 using Bounty.Models;
+using Bounty.Repositories;
 
 namespace Bounty.Services
 {
   public class AwardsService
   {
+    private readonly AwardsRepository _repo;
+
+    public AwardsService(AwardsRepository repo)
+    {
+      _repo = repo;
+    }
+
     internal object Get()
     {
       throw new NotImplementedException();
