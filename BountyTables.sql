@@ -68,6 +68,22 @@ CREATE TABLE IF NOT EXISTS deputies(
  PRIMARY KEY (id)
 );
 
+INSERT INTO deputies(name)
+VALUES("Pecos Bill");
+
+INSERT INTO deputies(name)
+VALUES("Doc Holliday");
+
+INSERT INTO deputies(name)
+VALUES("Clint Eastwood");
+
+INSERT INTO deputies(name)
+VALUES("John Wayne");
+
+INSERT INTO deputies(name)
+VALUES("Wyatt Earp");
+
+
 CREATE TABLE IF NOT EXISTS awardcities(
   id int AUTO_INCREMENT NOT NULL,
   creatorid VARCHAR(255) NOT NULL,

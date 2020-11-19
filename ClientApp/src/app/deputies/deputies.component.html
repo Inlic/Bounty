@@ -1,0 +1,18 @@
+<h1 id="tableLabel">Deputies</h1>
+
+<p>This component demonstrates fetching data from the server.</p>
+
+<p *ngIf="!deputies"><em>Loading...</em></p>
+
+<table class='table table-striped' aria-labelledby="tableLabel" *ngIf="deputies">
+  <thead>
+    <tr>
+      <th>Name</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let deputy of deputies">
+      <td>{{ deputy.name }}</td>
+    </tr>
+  </tbody>
+</table>
