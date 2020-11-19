@@ -22,7 +22,7 @@ namespace Bounty.Controllers
     {
       try
       {
-        ProfilesController userInfo = await HttpContext.GetUserInfoAsync<ProfilesController>();
+        Profile userInfo = await HttpContext.GetUserInfoAsync<Profile>();
         return Ok(_service.GetOrCreateProfile(userInfo));
       }
       catch (System.Exception error)

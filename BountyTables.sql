@@ -7,17 +7,6 @@ DROP TABLE awards;
 DROP TABLE cities;
 DROP TABLE deputies;
 
-
-CREATE TABLE IF NOT EXISTS profiles(
-  id VARCHAR(255) NOT NULL,
-  email VARCHAR(255) NOT NULL,
-  name VARCHAR(255),
-  picture VARCHAR(255),
-  income DECIMAL(8,2),
-
-  PRIMARY KEY (id)
-);
-
 CREATE TABLE IF NOT EXISTS cities(
  id int AUTO_INCREMENT NOT NULL,
  name VARCHAR(255),
@@ -28,7 +17,27 @@ CREATE TABLE IF NOT EXISTS cities(
 INSERT INTO cities(name)
 VALUES("Cactus Town");
 
-SELECT * FROM cities
+SELECT * FROM cities;
+
+CREATE TABLE IF NOT EXISTS profiles(
+  id VARCHAR(255) NOT NULL,
+  email VARCHAR(255) NOT NULL,
+  name VARCHAR(255),
+  picture VARCHAR(255),
+  income DECIMAL(8,2),
+  cityid int,
+
+  PRIMARY KEY (id),
+
+  FOREIGN KEY (cityid)
+  REFERENCES cities(id)
+  ON DELETE CASCADE
+);
+
+INSERT INTO profiles(id, email, name, picture)
+VALUES("test", "test@test.com", "Jim Test", "Smiley.jpg");
+
+SELECT * FROM profiles;
 
 
 CREATE TABLE IF NOT EXISTS awards(
@@ -45,10 +54,10 @@ CREATE TABLE IF NOT EXISTS awards(
 );
 
 INSERT INTO awards(description, payout, cityid)
-VALUES("Catch the Cactus Gang", 100, 1)
+VALUES("Catch the Cactus Gang", 100, 1);
 
 INSERT INTO awards(description, payout, cityid)
-VALUES("Round up some Mustangs", 50, 1)
+VALUES("Round up some Mustangs", 50, 1);
 
 SELECT * FROM awards;
 
