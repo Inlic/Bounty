@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using Bounty.Models;
 using Bounty.Repositories;
 
@@ -12,29 +13,46 @@ namespace Bounty.Services
     {
       _repo = repo;
     }
-    internal object Get()
+    internal IEnumerable<Deputy> Get()
     {
-      throw new NotImplementedException();
+      return _repo.Get();
     }
 
-    internal object GetById(int id)
+    internal Deputy GetById(int id)
     {
-      throw new NotImplementedException();
+      var data = _repo.GetById(id);
+      if (data == null)
+      {
+        throw new Exception("Invalid Id");
+      }
+      return data;
     }
 
-    internal object Create(Deputy deputy)
+    internal Deputy Create(Deputy deputy)
     {
-      throw new NotImplementedException();
+      return _repo.Create(deputy);
     }
 
-    internal object Update(Deputy deputy)
+    internal Deputy Update(Deputy deputy)
     {
-      throw new NotImplementedException();
+      var original = _repo.GetById(deputy.Id);
+      if (original == null)
+      {
+        throw new Exception("Invalid Id");
+      }
+      deputy.Name = deputy.Name != null ? deputy.Name : original.Name;
+      return _repo.Update(deputy);
     }
 
-    internal object Delete(int id)
+    internal bool Delete(int id)
     {
-      throw new NotImplementedException();
+      var original = _repo.GetById(id);
+      if (original == null)
+      {
+        throw new Exception("Invalid Id");
+      }
+      _repo.Delete(id);
+      return true;
     }
   }
 }
